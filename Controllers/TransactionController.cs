@@ -8,9 +8,7 @@ public class TransactionController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
 
-    private int? Month;
 
-    private int? Year;
 
     public TransactionController(ApplicationDbContext context)
     {
@@ -26,7 +24,22 @@ public class TransactionController : ControllerBase
         return Ok(transactions);
     }
        
+    [HttpPost(Name = "PostTransactions")]
 
+    public async Task<ActionResult<Transaction>> PostTransactions([FromBody] CreateTransactionDto dto)
+    {
+        var novaTransacao = new Transaction
+        {   
+            Value = dto.Value,
+            TransactionType = dto.TransactionType,
+            CategoryId = dto.CategoryId
+        };
+
+        _context.Transactions.Add(novaTransacao);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetTransactions), new { id = novaTransacao.TransactionId }, novaTransacao);
+    }
 
 }
 
