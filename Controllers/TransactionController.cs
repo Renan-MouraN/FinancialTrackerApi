@@ -41,5 +41,27 @@ public class TransactionController : ControllerBase
         return CreatedAtAction(nameof(GetTransactions), new { id = novaTransacao.TransactionId }, novaTransacao);
     }
 
+
+    [HttpPut("{id}")]
+
+    public async Task<ActionResult> Update(int id, CreateTransactionDto dto)
+    {
+        var transacaoExistente = await _context.Transactions.FindAsync(id);  //ENCONTRA A TRANSAÇÃO NO BANCO USANDO O ID RECEBIDO
+        if(transacaoExistente == null)
+        {
+            return NotFound(); //Simplesmente retorna que o objeto não foi encontrado, caso o ID não exista no banco
+        }
+
+        transacaoExistente.Value = dto.Value;
+        transacaoExistente.TransactionType = dto.TransactionType;
+        transacaoExistente.CategoryId = dto.CategoryId;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    
+
 }
 

@@ -16,8 +16,8 @@ public class CategoriesController : ControllerBase   //CRIAÇÃO DA CLASSE, esse
     
     public async Task<ActionResult<IEnumerable<Category>>> GetCategories()  //ESSE É O MÉTODO GET EM SI...É UM MÉTODO PÚBLICO ASSINCRONO (PORQUE PRECISAR "PEGAR" ALGO FORA DO CÓDIGO, NO CASO, A BASE)
     {
-        var categories = await _context.Categories.ToListAsync();   //ESSA É A VARIÁVEL QUE ARMAZENA AS CATEGORIAS...O AWAIT É PARA AGUARDAR A INFOMRAÇÃO SER RECUPERADA DA BASE
-                                //_context.Categories - Acessa a tabela de categorias através do DbContext e o .ToListAsync transforma o resultado da consulta em uma lista de forma assíncrona
+        var categories = await _context.Categories.ToListAsync();   //ESSA É A VARIÁVEL QUE ARMAZENA AS CATEGORIAS...O AWAIT É PARA AGUARDAR A INFORMAÇÃO SER RECUPERADA DA BASE 
+        //_context.Categories - Acessa a tabela de categorias através do DbContext e o .ToListAsync transforma o resultado da consulta em uma lista de forma assíncrona
         return Ok(categories);
     }
 
