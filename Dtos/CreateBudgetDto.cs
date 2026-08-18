@@ -1,10 +1,10 @@
-public class Budget
+using System.ComponentModel.DataAnnotations;
+
+public class CreateBudgetDto
 {
-    public int BudgetId {get;set;}
+
     public int UserId {get;set;}
-    public User User {get;set;}
     public DateTime Month {get;set;}
     public decimal Limit {get;set;}
-
 
 }

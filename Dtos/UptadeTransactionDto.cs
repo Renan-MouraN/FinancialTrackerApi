@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public class UpdateTransactionDto
 {
     public decimal Value {get;set;}

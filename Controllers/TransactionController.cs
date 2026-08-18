@@ -28,14 +28,14 @@ public class TransactionController : ControllerBase
 
     public async Task<ActionResult<Transaction>> PostTransactions([FromBody] CreateTransactionDto dto)
     {
-        var novaTransacao = new Transaction
+        var novaTransacao = new Transaction //Aqui é criado o objeto (diferente do PUT, que não se cria, só atualiza)
         {   
             Value = dto.Value,
             TransactionType = dto.TransactionType,
             CategoryId = dto.CategoryId
         };
 
-        _context.Transactions.Add(novaTransacao);
+        _context.Transactions.Add(novaTransacao); //Adiciona na base de dados, nas transações, o objeto criado
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetTransactions), new { id = novaTransacao.TransactionId }, novaTransacao); //retorna que o objeto foi criado e mostra o que foi
